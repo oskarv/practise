@@ -1,24 +1,17 @@
 package com.endava.utility;
-
-import com.endava.utility.list.Lists;
 import java.util.List;
+import com.google.common.collect.Lists;
+import static com.google.common.collect.Lists.newArrayList;
 
 public class Main {
 
     public static void main(String[] args) {
+        //uses import com.google.common.collect.Lists;
+        List<String> list1 = Lists.newArrayList("jedan", "dva", "tri");
+        System.out.println(list1);
 
-        List<String> listOfStrings = Lists.createList("jedan","dva","tri");
-        List<Integer> listOfIntegers = Lists.createList(1, 2, 3);
-        printList(listOfStrings);
-        printList(listOfIntegers);
-
-        List<String> listOfStrings2 = com.google.common.collect.Lists.newArrayList("jedan","dva","tri");
-        printList(listOfStrings2);
-    }
-
-    private static <E> void printList(List<E> list){
-        for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
-        }
+        //uses import static com.google.common.collect.Lists.newArrayList;
+        List<String> list2 = newArrayList("jedan", "dva", "tri");
+        System.out.println(list2);
     }
 }
