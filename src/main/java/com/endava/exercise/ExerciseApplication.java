@@ -8,7 +8,7 @@ public class ExerciseApplication {
 	public static void main(String[] args) {
 
 		ApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		Airplane airplane = context.getBean("airplane1", Airplane.class);
+		Airplane airplane = context.getBean("airbus", Airplane.class);
 		System.out.println(airplane.toString());
 		System.out.println("Pilot's name is: " + airplane.getPilot().getName());
 
