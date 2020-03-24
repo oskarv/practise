@@ -1,0 +1,17 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+       xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <bean id = "airbus" class = "com.endava.exercise.Airplane">
+        <property name = "pilot" value = "#{anja}"/>
+        <property name = "numberOfPassengers" value = "25"/>
+    </bean>
+
+    <bean id = "anja" class = "com.endava.exercise.Pilot">
+        <property name = "name" value = "Anja"/>
+    </bean>
+
+</beans>
