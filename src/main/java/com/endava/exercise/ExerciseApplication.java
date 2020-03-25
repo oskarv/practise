@@ -13,7 +13,6 @@ public class ExerciseApplication {
 		Airplane airplane = context.getBean("airbus", Airplane.class);
 		System.out.println(airplane.toString());
 		System.out.println("Pilot's name is: " + airplane.getPilot().getName());
-
 	}
 
 }
