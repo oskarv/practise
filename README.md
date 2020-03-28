@@ -9,5 +9,5 @@ Endava 2020 remote internship tasks
   <li> IOC / Dependancy Injection </li>
   <li> Java Coding Conventions </li>
   <li> Spring MVC </li>
-  <li> Spring REST </li>
+  <li> Spring REST & Spring Data </li>
 </ul>
