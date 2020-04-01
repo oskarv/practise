@@ -11,4 +11,6 @@ public interface StudentDao {
     List<Student> findStudentsByName(String name);
 
     boolean insertStudent(Student student);
+
+    boolean deleteStudent(int id);
 }

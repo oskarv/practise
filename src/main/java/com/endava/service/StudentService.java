@@ -32,4 +32,8 @@ public class StudentService {
     public List<Student> findAllStudents() {
         return studentDao.findAllStudents();
     }
+
+    public void deleteStudent(int id) {
+        studentDao.deleteStudent(id);
+    }
 }

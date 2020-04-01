@@ -59,4 +59,15 @@ public class StudentDaoImpl implements StudentDao {
         return true;
     }
 
+    @Override
+    public boolean deleteStudent(int id) {
+        for (Student student : listOfStudents) {
+            if (student.getId() == id) {
+                listOfStudents.remove(student);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

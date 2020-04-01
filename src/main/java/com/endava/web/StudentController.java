@@ -48,6 +48,15 @@ public class StudentController {
         }
     }
 
+    @RequestMapping(method = RequestMethod.DELETE)
+    @ResponseBody
+    public void deleteStudent(@RequestParam int id) {
+        if (id < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id is not valid.");
+        }
+        studentService.deleteStudent(id);
+    }
+
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")
     public List<Student> findAllStudents() {
         return studentService.findAllStudents();
