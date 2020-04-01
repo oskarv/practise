@@ -40,9 +40,11 @@ public class StudentController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
     @ResponseBody
-    public void insertStudent(@RequestBody Student student) {
-        if (!studentService.insertStudent(student)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with id=" + student.getId() + " already exists.");
+    public void insertStudent(@RequestBody Student newStudent) {
+        if (newStudent.getName() == null || newStudent.getId() < 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please insert student's name and id.");
+        } else if (!studentService.insertStudent(newStudent)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with id=" + newStudent.getId() + " already exists.");
         }
     }
 
