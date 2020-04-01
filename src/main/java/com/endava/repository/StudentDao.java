@@ -8,5 +8,7 @@ public interface StudentDao {
 
     Student findStudentById(int id);
 
+    List<Student> findStudentsByName(String name);
+
     boolean insertStudent(Student student);
 }

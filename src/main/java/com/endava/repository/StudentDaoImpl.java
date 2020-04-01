@@ -38,6 +38,17 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
+    public List<Student> findStudentsByName(String name) {
+        List<Student> studentsWithSameName = new ArrayList<>();
+        for (Student student : listOfStudents) {
+            if (student.getName().equals(name)) {
+                studentsWithSameName.add(student);
+            }
+        }
+        return studentsWithSameName;
+    }
+
+    @Override
     public boolean insertStudent(Student newStudent) {
         for (Student student : listOfStudents) {
             if (student.getId() == newStudent.getId()) {

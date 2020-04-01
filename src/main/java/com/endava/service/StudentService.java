@@ -9,6 +9,7 @@ import java.util.List;
 
 @Service
 public class StudentService {
+
     private StudentDao studentDao;
 
     @Autowired
@@ -20,6 +21,9 @@ public class StudentService {
         return studentDao.findStudentById(id);
     }
 
+    public List<Student> findStudentsByName(String name) {
+        return studentDao.findStudentsByName(name);
+    }
 
     public boolean insertStudent(Student student) {
         return studentDao.insertStudent(student);

@@ -5,7 +5,9 @@ public class Student {
     private String name;
     private int id;
 
-    public Student(){}
+    public Student() {
+        // no arguments constructor used by jackson
+    }
 
     public Student(String name, int id) {
         this.name = name;

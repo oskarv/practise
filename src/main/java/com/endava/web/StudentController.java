@@ -4,7 +4,12 @@ import com.endava.repository.Student;
 import com.endava.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -20,12 +25,17 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/id", method = RequestMethod.GET, produces = "application/json")
     public Student findStudentById(@RequestParam int id) {
         if (studentService.findStudentById(id) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student with id=" + id + " doesn't exist.");
         }
         return studentService.findStudentById(id);
+    }
+
+    @RequestMapping(value = "/name", method = RequestMethod.GET, produces = "application/json")
+    public List<Student> findStudentsByName(@RequestParam String name) {
+        return studentService.findStudentsByName(name);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = "application/json")
