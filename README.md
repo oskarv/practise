@@ -10,4 +10,5 @@ Endava 2020 remote internship tasks
   <li> Java Coding Conventions </li>
   <li> Spring MVC </li>
   <li> Spring REST & Spring Data </li>
+  <li> MySQL and JDBC </li>
 </ul>
