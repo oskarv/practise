@@ -25,7 +25,7 @@ public class StudentController {
         this.studentService = studentService;
     }
 
-    @RequestMapping(value = "/id", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public Student findStudentById(@RequestParam int id) {
         if (studentService.findStudentById(id) == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student with id=" + id + " doesn't exist.");
