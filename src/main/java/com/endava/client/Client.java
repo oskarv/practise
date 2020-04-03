@@ -15,7 +15,7 @@ public class Client {
         RestTemplate restTemplate = new RestTemplate();
 
         // find student with id
-        Student student = restTemplate.getForObject("http://localhost:8080/student?id=123200007", Student.class);
+        Student student = restTemplate.getForObject("http://localhost:8080/student/id/123200007", Student.class);
         System.out.println(student);
 
         // insert student
@@ -37,7 +37,7 @@ public class Client {
         System.out.println(Arrays.toString(students));
 
         // find all students with same name
-        ResponseEntity<Student[]> responseEntityNames = restTemplate.getForEntity("http://localhost:8080/student/name?name=Jovan", Student[].class);
+        ResponseEntity<Student[]> responseEntityNames = restTemplate.getForEntity("http://localhost:8080/student/name/Jovan", Student[].class);
         Student[] studentsWithSameName = responseEntityNames.getBody();
         System.out.println(Arrays.toString(studentsWithSameName));
     }
