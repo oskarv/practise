@@ -1,73 +1,53 @@
 package com.endava.repository;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class StudentDaoImpl implements StudentDao {
 
-    List<Student> listOfStudents;
+    private JdbcTemplate jdbcTemplate;
 
-    public StudentDaoImpl() {
-        listOfStudents = new ArrayList<Student>();
-        Student student1 = new Student("Anja", 123200007);
-        Student student2 = new Student("Bojana", 143200100);
-        Student student3 = new Student("Jovan", 103202005);
-        Student student4 = new Student("Jovan", 104562343);
-        listOfStudents.add(student1);
-        listOfStudents.add(student2);
-        listOfStudents.add(student3);
-        listOfStudents.add(student4);
+    @Autowired
+    public StudentDaoImpl(JdbcTemplate jdbcTemplate) {
+        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public List<Student> findAllStudents() {
-        return listOfStudents;
+        return jdbcTemplate.query("SELECT * FROM student", new BeanPropertyRowMapper(Student.class));
     }
 
     @Override
     public Student findStudentById(int id) {
-        for (Student student : listOfStudents) {
-            if (student.getId() == id) {
-                return student;
-            }
+        try {
+            return (Student) jdbcTemplate.queryForObject("SELECT * FROM student where id = ? ",
+                    new Object[]{id}, new BeanPropertyRowMapper(Student.class));
+        } catch (EmptyResultDataAccessException e) {
+            return null;
         }
-        return null;
     }
 
     @Override
     public List<Student> findStudentsByName(String name) {
-        List<Student> studentsWithSameName = new ArrayList<>();
-        for (Student student : listOfStudents) {
-            if (student.getName().equals(name)) {
-                studentsWithSameName.add(student);
-            }
-        }
-        return studentsWithSameName;
+        return jdbcTemplate.query("SELECT * FROM student WHERE name = ?", new Object[]{name}, new BeanPropertyRowMapper(Student.class));
     }
 
     @Override
     public boolean insertStudent(Student newStudent) {
-        for (Student student : listOfStudents) {
-            if (student.getId() == newStudent.getId()) {
-                return false;
-            }
-        }
-        listOfStudents.add(newStudent);
-        return true;
+        int result = jdbcTemplate.update("INSERT INTO student (id, name) VALUES (?, ?)",
+                newStudent.getId(), newStudent.getName());
+        return result == 1;
     }
 
     @Override
     public boolean deleteStudent(int id) {
-        for (Student student : listOfStudents) {
-            if (student.getId() == id) {
-                listOfStudents.remove(student);
-                return true;
-            }
-        }
-        return false;
+        int result = jdbcTemplate.update("DELETE from student WHERE id = ? ", id);
+        return result == 1;
     }
-
 }
