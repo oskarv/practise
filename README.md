@@ -11,4 +11,5 @@ Endava 2020 remote internship tasks
   <li> Spring MVC </li>
   <li> Spring REST & Spring Data </li>
   <li> MySQL and JDBC </li>
+  <li> Hibernate and Error Handling </li>
 </ul>
