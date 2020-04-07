@@ -39,10 +39,9 @@ public class StudentDaoImpl implements StudentDao {
     }
 
     @Override
-    public boolean insertStudent(Student newStudent) {
-        int result = jdbcTemplate.update("INSERT INTO student (id, name) VALUES (?, ?)",
+    public void insertStudent(Student newStudent) {
+        jdbcTemplate.update("INSERT INTO student (id, name) VALUES (?, ?)",
                 newStudent.getId(), newStudent.getName());
-        return result == 1;
     }
 
     @Override
