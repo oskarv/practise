@@ -1,9 +1,12 @@
 package com.endava.web;
 
+import com.endava.exception.StudentBadRequestDuplicatedId;
+import com.endava.exception.StudentBadRequestInvalidInput;
+import com.endava.exception.StudentNotFoundException;
 import com.endava.repository.Student;
 import com.endava.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -29,7 +31,7 @@ public class StudentController {
     @RequestMapping(value = "/id/{id}", method = RequestMethod.GET, produces = "application/json")
     public Student findStudentById(@PathVariable int id) {
         if (studentService.findStudentById(id) == null) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Student with id=" + id + " doesn't exist.");
+            throw new StudentNotFoundException();
         }
         return studentService.findStudentById(id);
     }
@@ -43,9 +45,13 @@ public class StudentController {
     @ResponseBody
     public void insertStudent(@RequestBody Student newStudent) {
         if (newStudent.getName() == null || newStudent.getId() < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Please insert student's name and id.");
-        } else if (!studentService.insertStudent(newStudent)) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Student with id=" + newStudent.getId() + " already exists.");
+            throw new StudentBadRequestInvalidInput();
+        } else {
+            try {
+                studentService.insertStudent(newStudent);
+            } catch (DuplicateKeyException e) {
+                throw new StudentBadRequestDuplicatedId();
+            }
         }
     }
 
@@ -53,9 +59,12 @@ public class StudentController {
     @ResponseBody
     public void deleteStudent(@RequestParam int id) {
         if (id < 0) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "id is not valid.");
+            throw new StudentBadRequestInvalidInput();
         }
-        studentService.deleteStudent(id);
+        boolean result = studentService.deleteStudent(id);
+        if (!result) {
+            throw new StudentNotFoundException();
+        }
     }
 
     @RequestMapping(value = "/all", method = RequestMethod.GET, produces = "application/json")

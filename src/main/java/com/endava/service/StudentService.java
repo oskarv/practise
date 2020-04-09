@@ -25,15 +25,15 @@ public class StudentService {
         return studentDao.findStudentsByName(name);
     }
 
-    public boolean insertStudent(Student student) {
-        return studentDao.insertStudent(student);
+    public void insertStudent(Student student) {
+        studentDao.insertStudent(student);
     }
 
     public List<Student> findAllStudents() {
         return studentDao.findAllStudents();
     }
 
-    public void deleteStudent(int id) {
-        studentDao.deleteStudent(id);
+    public boolean deleteStudent(int id) {
+        return studentDao.deleteStudent(id);
     }
 }
