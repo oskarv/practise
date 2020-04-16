@@ -14,4 +14,6 @@ Endava 2020 remote internship tasks
   <li> Hibernate and Error Handling </li>
   <li> Unit testing - JUnit 5 </li>
   <li> Microservices </li>
+  <li> Intro to Frontend development </li>
+  <li> JavaScript fundamentals </li>
 </ul>
