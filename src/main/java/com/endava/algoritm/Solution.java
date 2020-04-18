@@ -3,35 +3,32 @@ package com.endava.algoritm;
 public class Solution {
 
     public static int solution(int[] A) {
-        /*
-           Order from smaller to bigger:
-           minMin <= min <= max <= maxMax <= maxMaxMax
-        */
-        int minMin = Integer.MAX_VALUE;
+
         int min = Integer.MAX_VALUE;
+        int secondMin = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
-        int maxMax = Integer.MIN_VALUE;
-        int maxMaxMax = Integer.MIN_VALUE;
+        int secondMax = Integer.MIN_VALUE;
+        int thirdMax = Integer.MIN_VALUE;
 
         for (int i = 0; i < A.length; i++) {
-            if (maxMaxMax < A[i]) {
-                max = maxMax;
-                maxMax = maxMaxMax;
-                maxMaxMax = A[i];
-            } else if (maxMax < A[i]) {
-                max = maxMax;
-                maxMax = A[i];
+            if (thirdMax < A[i]) {
+                max = secondMax;
+                secondMax = thirdMax;
+                thirdMax = A[i];
+            } else if (secondMax < A[i]) {
+                max = secondMax;
+                secondMax = A[i];
             } else if (max < A[i]) {
                 max = A[i];
             }
 
-            if (minMin > A[i]) {
-                min = minMin;
-                minMin = A[i];
-            } else if (min > A[i]) {
+            if (min > A[i]) {
+                secondMin = min;
                 min = A[i];
+            } else if (secondMin > A[i]) {
+                secondMin = A[i];
             }
         }
-        return Math.max(maxMaxMax * maxMax * max, maxMaxMax * minMin * min);
+        return Math.max(thirdMax * secondMax * max, thirdMax * min * secondMin);
     }
 }
