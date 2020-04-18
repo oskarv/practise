@@ -3,6 +3,10 @@ package com.endava.algoritm;
 public class Solution {
 
     public static int solution(int[] A) {
+        /*
+           Order from smaller to bigger:
+           minMin <= min <= max <= maxMax <= maxMaxMax
+        */
         int minMin = Integer.MAX_VALUE;
         int min = Integer.MAX_VALUE;
         int max = Integer.MIN_VALUE;
