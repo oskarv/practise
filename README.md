@@ -16,5 +16,6 @@ Endava 2020 remote internship tasks
   <li> Microservices </li>
   <li> Intro to Frontend development </li>
   <li> JavaScript fundamentals </li>
+  <li> DOM, Events & Ajax </li>
   <li> Backbone.js </li>
 </ul>
