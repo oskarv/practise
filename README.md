@@ -6,7 +6,7 @@ Endava 2020 remote internship tasks
 
 <ul> 
   <li> Intro to build tools for java </li>
-  <li> IOC / Dependancy Injection </li>
+  <li> IOC / Dependency Injection </li>
   <li> Java Coding Conventions </li>
   <li> Spring MVC </li>
   <li> Spring REST & Spring Data </li>
